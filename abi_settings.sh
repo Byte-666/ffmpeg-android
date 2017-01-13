@@ -8,36 +8,38 @@ case $1 in
   armeabi)
     NDK_ABI='arm'
     NDK_TOOLCHAIN_ABI='arm-linux-androideabi'
-    NDK_CROSS_PREFIX="${NDK_TOOLCHAIN_ABI}"
-  ;;	
+    NDK_CROSS_PREFIX="arm-linux-androideabi"
+  ;;
   armeabi-v7a)
     NDK_ABI='arm'
     NDK_TOOLCHAIN_ABI='arm-linux-androideabi'
-    NDK_CROSS_PREFIX="${NDK_TOOLCHAIN_ABI}"
+    NDK_CROSS_PREFIX="arm-linux-androideabi"
   ;;
   armeabi-v7a-neon)
     NDK_ABI='arm'
     NDK_TOOLCHAIN_ABI='arm-linux-androideabi'
-    NDK_CROSS_PREFIX="${NDK_TOOLCHAIN_ABI}"
+    NDK_CROSS_PREFIX="arm-linux-androideabi"
     CFLAGS="${CFLAGS} -mfpu=neon"
   ;;
   arm64-v8a)
-    NDK_ABI='arm'
+    NDK_ABI='aarch64'
     NDK_TOOLCHAIN_ABI='aarch64-linux-android'
-    NDK_CROSS_PREFIX="${NDK_TOOLCHAIN_ABI}"
+    NDK_CROSS_PREFIX="aarch64-linux-android"
     CFLAGS="${CFLAGS}"
+    ANDROID_API_VERSION=21
   ;;
   x86)
     NDK_ABI='x86'
-    NDK_TOOLCHAIN_ABI='x86'
+    NDK_TOOLCHAIN_ABI='x86-linux-android'
     NDK_CROSS_PREFIX="i686-linux-android"
     CFLAGS="${CFLAGS} -march=i686"
   ;;
   x86_64)
     NDK_ABI='x86_64'
-    NDK_TOOLCHAIN_ABI='x86_64'
+    NDK_TOOLCHAIN_ABI='x86_64-linux-android'
     NDK_CROSS_PREFIX="x86_64-linux-android"
-    CFLAGS="${CFLAGS} -march=x86_64"
+    CFLAGS="${CFLAGS}"
+    ANDROID_API_VERSION=21
   ;;
 esac
 
@@ -45,6 +47,7 @@ TOOLCHAIN_PREFIX=${BASEDIR}/toolchain-android-$1
 if [ ! -d "${TOOLCHAIN_PREFIX}" ]; then
   ${ANDROID_NDK_ROOT_PATH}/build/tools/make-standalone-toolchain.sh --toolchain=${NDK_TOOLCHAIN_ABI}-${NDK_TOOLCHAIN_ABI_VERSION} --platform=android-${ANDROID_API_VERSION} --install-dir=${TOOLCHAIN_PREFIX}
 fi
+CROSS_BIN=${TOOLCHAIN_PREFIX}/bin/
 CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/${NDK_CROSS_PREFIX}-
 NDK_SYSROOT=${TOOLCHAIN_PREFIX}/sysroot
 
@@ -71,5 +74,5 @@ if [ $3 == 1 ]; then
   export NM="${CROSS_PREFIX}nm"
   export SIZE="${CROSS_PREFIX}size"
   export STRINGS="${CROSS_PREFIX}strings"
-  export YASMEXE="${CROSS_PREFIX}yasm"
+  export YASMEXE="${CROSS_BIN}yasm"
 fi

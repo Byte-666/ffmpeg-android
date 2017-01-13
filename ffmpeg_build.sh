@@ -4,18 +4,6 @@
 
 pushd ffmpeg
 
-case $1 in
-  armeabi | armeabi-v7a | armeabi-v7a-neon | arm64-v8a)
-    CPU='cortex-a8'
-  ;;
-  x86)
-    CPU='i686'
-  ;;
-  x86_64)
-    CPU='x86_64'
-  ;;
-esac
-
 make clean
 
 echo $CFLAGS
@@ -36,7 +24,6 @@ cp $2/gas-preprocessor.pl /usr/bin
 --nm="$NM" \
 --yasmexe="$YASMEXE" \
 --arch="$NDK_ABI" \
---cpu="$CPU" \
 --enable-cross-compile \
 --enable-runtime-cpudetect \
 --sysroot="$NDK_SYSROOT" \

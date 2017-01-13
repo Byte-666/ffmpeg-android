@@ -1,15 +1,17 @@
 [FFmpeg-Android](http://hiteshsondhi88.github.io/ffmpeg-android/) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FFmpeg--Android-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/925)
 ==============
 
-* FFmpeg for Android compiled with x264, libass, fontconfig, freetype and fribidi
-* Supports Android L
+* FFmpeg for Android compiled with x264
+* Supports Android 15
 * [FFmpeg Android Library](https://github.com/hiteshsondhi88/ffmpeg-android-java)
 
 Supported Architecture
 ----
 * armv7
 * armv7-neon
+* aarch64
 * x86
+* x86_64
 
 Instructions
 ----
