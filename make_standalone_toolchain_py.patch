@@ -1,0 +1,20 @@
+# HG changeset patch
+# User luiz
+# Date 1484114216 7200
+#      Wed Jan 11 03:56:56 2017 -0200
+# Node ID 3e7516e549e173996707c9039fad1d4a253c51b2
+# Parent  421d061c30f4d7b9d7c226d2c050cf3ef218709d
+msys fix
+
+diff -r 421d061c30f4 -r 3e7516e549e1 make_standalone_toolchain.py
+--- a/make_standalone_toolchain.py	Wed Jan 11 03:56:11 2017 -0200
++++ b/make_standalone_toolchain.py	Wed Jan 11 03:56:56 2017 -0200
+@@ -86,6 +86,8 @@
+         return 'linux-x86_64'
+     elif platform.system() == 'Darwin':
+         return 'darwin-x86_64'
++    elif platform.system() == 'MSYS_NT-6.1':
++        return 'windows-x86_64'
+     elif platform.system() == 'Windows':
+         host_tag = 'windows-x86_64'
+         if not os.path.exists(os.path.join(NDK_DIR, 'prebuilt', host_tag)):

@@ -7,15 +7,20 @@ pushd x264
 make clean
 
 case $1 in
-  armeabi-v7a | armeabi-v7a-neon)
+  armeabi | armeabi-v7a | armeabi-v7a-neon | arm64-v8a)
     HOST=arm-linux
   ;;
   x86)
     HOST=i686-linux
   ;;
+  x86_64)
+    HOST=x86_64-linux
+  ;;
 esac
 
 echo $CFLAGS
+echo $CROSS_PREFIX
+echo $HOST
 
 ./configure \
   --cross-prefix="$CROSS_PREFIX" \
@@ -26,7 +31,8 @@ echo $CFLAGS
   --enable-static \
   --disable-shared \
   --prefix="${TOOLCHAIN_PREFIX}" \
-  --disable-cli || exit 1
+  --disable-cli \
+|| exit 1
 
 make -j${NUMBER_OF_CORES} install || exit 1
 
